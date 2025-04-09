@@ -43,10 +43,12 @@ jobs:
   spot:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout master branch
+      uses: actions/checkout@v4
       with:
         ref: main
-    - uses: actions/github-script@v7
+    - name: Update spotting file
+      uses: actions/github-script@v7
       with:
         script: |
           const fs = require('node:fs');
@@ -58,7 +60,8 @@ jobs:
           json.push({"time": new Date(), "callsign": "${{ github.event.inputs.callsign }}", "frequency": "${{ github.event.inputs.frequency }}", "mode": "${{ github.event.inputs.mode }}", "notes": "${{ github.event.inputs.notes }}"})
           console.log(json)
           fs.writeFileSync(SPOT_FILE_NAME, JSON.stringify(json), 'utf8')
-    - run: |
+    - name: Commit changes
+      run: |
         git config user.name 'github-actions[bot]'
         git config user.email 'github-actions[bot]@users.noreply.github.com'
         git add 2025-ARSA-Special-Event-Spots.json
