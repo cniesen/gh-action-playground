@@ -58,5 +58,9 @@ jobs:
           json.push({"callsign": "${{ github.event.inputs.callsign }}", "frequency": "${{ github.event.inputs.frequency }}", "mode": "${{ github.event.inputs.mode }}", "notes": "${{ github.event.inputs.notes }}"})
           console.log(json)
           fs.writeFileSync(SPOT_FILE_NAME, JSON.stringify(json), 'utf8')
+    - run: |
+        git add 2025-ARSA-Special-Event-Spots.json
+        git commit -m "Posted ARSA Special Event spot"
+        git push
 
           
