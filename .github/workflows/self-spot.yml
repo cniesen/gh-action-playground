@@ -55,7 +55,7 @@ jobs:
           if (fs.existsSync(SPOT_FILE_NAME)) {
             json = JSON.parse( fs.readFileSync(SPOT_FILE_NAME, 'utf8'))
           }
-          json.push({"callsign": "${{ github.event.inputs.callsign }}", "frequency": "${{ github.event.inputs.frequency }}", "mode": "${{ github.event.inputs.mode }}", "notes": "${{ github.event.inputs.notes }}"})
+          json.push({"time": new Date(), "callsign": "${{ github.event.inputs.callsign }}", "frequency": "${{ github.event.inputs.frequency }}", "mode": "${{ github.event.inputs.mode }}", "notes": "${{ github.event.inputs.notes }}"})
           console.log(json)
           fs.writeFileSync(SPOT_FILE_NAME, JSON.stringify(json), 'utf8')
     - run: |
