@@ -59,6 +59,8 @@ jobs:
           console.log(json)
           fs.writeFileSync(SPOT_FILE_NAME, JSON.stringify(json), 'utf8')
     - run: |
+        git config user.name 'github-actions[bot]'
+        git config user.email 'github-actions[bot]@users.noreply.github.com'
         git add 2025-ARSA-Special-Event-Spots.json
         git commit -m "Posted ARSA Special Event spot"
         git push
